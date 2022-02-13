@@ -11,10 +11,29 @@ const newTaskForm = document.querySelector('[data-new-task-form]')
 const newTaskInput = document.querySelector('[data-new-task-input]')
 const clearCompleteTasksButton = document.querySelector('[data-clear-complete-tasks-button]')
 
+const api = {
+    key: "148f47353c97fdf70d0cd1951904a49d",
+    token: "3383abd611623dfd1495850cab9359147238afacc93b1f224e604f3218344a9a",
+    base: "https://api.trello.com",
+    boardID: "620506cba1c703887437fcd8"
+}
+
+function callapi() {
+    fetch(`${api.base}/1/members/me/boards?key=${api.key}&token=${api.token}`)
+    .then(res => res.json())
+    .then(data => console.log(data))
+}
+
+callapi()
+
+
+
 const LOCAL_STORAGE_LIST_KEY = 'task.lists'
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId'
+const LOCAL_STORAGE_SELECTED_TRELLOLIST_ID = 'task.selectedTrelloListID'
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || []
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY)
+let selectedTrelloListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_TRELLOLIST_ID)
 
 listsContainer.addEventListener('click', e => {
     if (e.target.tagName.toLowerCase() === 'li') {
@@ -42,12 +61,26 @@ deleteListbutton.addEventListener('click', e => {
 newlistForm.addEventListener('submit', e => {
     e.preventDefault()
     const listName = newlistInput.value
+    fetch(`https://api.trello.com/1/boards/${api.boardID}/lists?name=${listName}&key=${api.key}&token=${api.token}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(res => res.json()).then(data => {
+        saveTrelloListid(data)
+        console.log(data);
+    })
     if (listName == null || listName === '') return
     const list = createList(listName)
     newlistInput.value = null
     lists.push(list)
     saveAndRender()
 })
+
+function saveTrelloListid(data) {
+    localStorage.setItem(LOCAL_STORAGE_SELECTED_TRELLOLIST_ID, data.id)
+}
 
 newTaskForm.addEventListener('submit', e => {
     e.preventDefault()
@@ -82,7 +115,7 @@ function createTask(name) {
 
 function save() {
     localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(lists))
-    localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListID)
+    localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListID)    
 }
 
 function render() {
@@ -111,7 +144,6 @@ function renderTasks(selectedList) {
         label.htmlFor = task.id
         label.append(task.name)
         tasksContainer.appendChild(taskElement)
-
     })
 }
 
