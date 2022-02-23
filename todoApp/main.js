@@ -36,8 +36,20 @@ async function getListName(listId) {
     `${api.base}/1/lists/${listId}?key=${api.key}&token=${api.token}`
   )
     .then((res) => res.json())
-    .then((data) => data.name);
+    .then((data) => data.name)
+
 }
+
+async function getEmptyList(boardID = "61de5518990cbc6ea8d2b398") {
+  await fetch(
+    `${api.base}/1/boards/${boardID}/lists/?key=${api.key}&token=${api.token}`
+  )
+  .then((res) => res.json())
+  .then((data) => console.log(data))
+}
+
+getEmptyList()
+
 
 var groupBy = function (xs, key) {
   return xs.reduce(function (rv, x) {
@@ -49,13 +61,20 @@ async function getCards(boardID = "61de5518990cbc6ea8d2b398") {
   const resArr = await fetch(
     `${api.base}/1/boards/${boardID}/cards/?key=${api.key}&token=${api.token}`
   ).then((res) => res.json());
+
+  console.log(resArr)
+  
   const listNames = await Promise.all(
     resArr.map(async ({ idList }) => getListName(idList)),
   );
+
   const merged = resArr.map((d, i) => {
     const { name, idList, idBoard, closed, id } = d;
     return { name, idList, idBoard, complete: closed, id, list: listNames[i] };
   });
+
+  console.log(merged)
+
   const grouped = groupBy(merged, "list"); //
 
   const myList = [];
@@ -74,6 +93,7 @@ async function getCards(boardID = "61de5518990cbc6ea8d2b398") {
   }
   return myList;
 }
+
 
 listsContainer.addEventListener("click", (e) => {
   if (e.target.tagName.toLowerCase() === "li") {
