@@ -40,42 +40,54 @@ async function getListName(listId) {
 
 }
 
-async function getEmptyList(boardID = "61de5518990cbc6ea8d2b398") {
-  await fetch(
-    `${api.base}/1/boards/${boardID}/lists/?key=${api.key}&token=${api.token}`
-  )
-  .then((res) => res.json())
-  .then((data) => console.log(data))
-}
-
-getEmptyList()
-
-
 var groupBy = function (xs, key) {
   return xs.reduce(function (rv, x) {
     (rv[x[key]] = rv[x[key]] || []).push(x);
     return rv;
   }, {});
 };
+
+async function getEmptyList(merged, boardID = "61de5518990cbc6ea8d2b398") {
+  const resList = await fetch(
+    `${api.base}/1/boards/${boardID}/lists/?key=${api.key}&token=${api.token}`
+  )
+  .then((res) => res.json())
+
+    const emptyListCards = resList.map((d) => {
+    const { name, id, idBoard, closed } =d;
+    return {name: '', idList: id, idBoard, complete: closed, id: '', list: name}
+  })
+  
+
+  for (let index = 0; index < Object.values(merged).length; index++) {
+    const mergedlistID = Object.values(merged)[index]['idList'];
+    const emptyListID = Object.values(emptyListCards)[index]['idList'];
+    if (mergedlistID != emptyListID) {
+      merged.push(emptyListCards[index])
+      console.log(merged)
+      return;
+    }
+  }
+
+}
+
 async function getCards(boardID = "61de5518990cbc6ea8d2b398") {
   const resArr = await fetch(
     `${api.base}/1/boards/${boardID}/cards/?key=${api.key}&token=${api.token}`
   ).then((res) => res.json());
-
-  console.log(resArr)
   
   const listNames = await Promise.all(
     resArr.map(async ({ idList }) => getListName(idList)),
   );
 
-  const merged = resArr.map((d, i) => {
+  let merged = resArr.map((d, i) => {
     const { name, idList, idBoard, closed, id } = d;
     return { name, idList, idBoard, complete: closed, id, list: listNames[i] };
   });
 
-  console.log(merged)
+  await getEmptyList(merged)
 
-  const grouped = groupBy(merged, "list"); //
+  const grouped = groupBy(merged, "list"); 
 
   const myList = [];
   for (let index = 0; index < Object.values(grouped).length; index++) {
@@ -90,10 +102,10 @@ async function getCards(boardID = "61de5518990cbc6ea8d2b398") {
         complete: d.complete,
       })),
     });
+    console.log(myList)
   }
   return myList;
 }
-
 
 listsContainer.addEventListener("click", (e) => {
   if (e.target.tagName.toLowerCase() === "li") {
