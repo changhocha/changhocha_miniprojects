@@ -128,6 +128,21 @@ tasksContainer.addEventListener("click", (e) => {
 
 deleteListbutton.addEventListener("click", (e) => {
   lists = lists.filter((list) => list.id !== selectedListID);
+  fetch(`https://api.trello.com/1/lists/${selectedListID}/?key=${api.key}&token=${api.token}`, {
+  method: 'PUT',
+  headers:{
+    'Content-Type':'application/json'
+    },
+    body: JSON.stringify({closed: true})
+})
+  .then(response => {
+    console.log(
+      `Response: ${response.status} ${response.statusText}`
+    );
+    return response.text();
+  })
+  .then(text => console.log(text))
+  .catch(err => console.error(err));
   selectedListID = null;
   saveAndRender();
 });
