@@ -8,7 +8,7 @@ const Scoreboard = () => {
           <p>
             <abbr title="Player One">P1</abbr>
           </p>
-          <p>All Time</p>
+          <p>전체 점수</p>
           <p>
             <abbr title="Computer Player">CP</abbr>
           </p>
@@ -40,7 +40,7 @@ const Scoreboard = () => {
           <p>
             <abbr title="Player One">P1</abbr>
           </p>
-          <p>Session</p>
+          <p>현재 점수</p>
           <p>
             <abbr title="Computer Player">CP</abbr>
           </p>
