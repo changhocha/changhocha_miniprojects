@@ -24,11 +24,11 @@ const Game = () => {
     const CPUchoice = getComputerChoice();
     const result = determineWinner(p1Selected, CPUchoice);
     setisSelected(true);
-    visiable(p1Selected);
-    console.log(result);
+    visibleFinal(visibleWhich(p1Selected));
+    console.log(result, p1Selected);
   };
 
-  const visiable = (p1Selected) => {
+  const visibleWhich = (p1Selected) => {
     const visRock = {
       Rock: true,
       Paper: false,
@@ -44,13 +44,19 @@ const Game = () => {
       Paper: false,
       Scissors: true,
     };
+
     if (p1Selected === "Rock") {
       return visRock;
     } else if (p1Selected === "Paper") {
       return visPaper;
-    } else {
+    } else if (p1Selected === "Scissors") {
       return visScissors;
     }
+  };
+
+  const visibleFinal = (visibleFinal) => {
+    console.log(visibleFinal);
+    return visibleFinal;
   };
 
   return (
@@ -60,7 +66,7 @@ const Game = () => {
         onClick={handleClick}
         gbtitle="플레이어 선택"
         cbtitle="컴퓨터 선택"
-        visialbe={visiable}
+        visible={visibleFinal}
         isSelected={isSelected}
       />
     </div>

@@ -2,17 +2,15 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useState } from "react";
 
-const Gameboard = ({ cbtitle, gbtitle, onClick, isSelected, visiable }) => {
+const Gameboard = ({ cbtitle, gbtitle, onClick, isSelected, visible }) => {
   const vis = () => {
     const notSelected = {
       Rock: true,
       Paper: true,
       Scissors: true,
     };
-    return isSelected ? visiable : notSelected;
+    const visEnd = isSelected ? visible : notSelected;
   };
-
-  const viscon = vis();
 
   return (
     <section id="playerBoard" className="playerBoard">
