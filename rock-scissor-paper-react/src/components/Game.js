@@ -1,48 +1,55 @@
 import React, { useState } from "react";
 import Gameboard from "./Gameboard";
-import Computerboard from "./Computerboard";
 
 const Game = () => {
   const [p1Click, setp1Click] = useState("");
-  const [p1Choice, setp1Choice] = useState("");
-  const [CPUchoice, setCPUchoice] = useState("");
-  const [winner, setWinner] = useState("");
-
-  if (p1Click === "p1Rock") {
-    setp1Choice("Rock");
-    console.log(p1Choice);
-  } else if (p1Click === "p1Paper") {
-    setp1Choice("Paper");
-    console.log(p1Choice);
-  } else if (p1Click === "p1Scissors") {
-    setp1Choice("Scissors");
-    console.log(p1Choice);
-  }
-
-  const handleClick = (p1Selected) => () => {
-    setp1Click(p1Selected);
-    getComputerChoice();
-  };
+  const [isSelected, setisSelected] = useState(false);
 
   const getComputerChoice = () => {
     const randomNumber = Math.floor(Math.random() * 3);
     const rpsArray = ["Rock", "Paper", "Scissors"];
-    setCPUchoice(rpsArray[randomNumber]);
-    console.log(CPUchoice);
-    determineWinner();
+    return rpsArray[randomNumber];
   };
 
-  const determineWinner = () => {
-    if (p1Choice === CPUchoice) {
-      setWinner("Tie");
-    } else if (
-      (p1Choice === "Rock" && CPUchoice === "Paper") ||
-      (p1Choice === "Paper" && CPUchoice === "Scissors") ||
-      (p1Choice === "Scissors" && CPUchoice === "Rock")
-    ) {
-      setWinner("Computer");
+  const determineWinner = (player1, player2) => {
+    const player2Win =
+      (player1 === "Rock" && player2 === "Paper") ||
+      (player1 === "Paper" && player2 === "Scissors") ||
+      (player1 === "Scissors" && player2 === "Rock");
+    const tie = player1 === player2;
+    return tie ? "Tie" : player2Win ? "Computer" : "Player";
+  };
+
+  const handleClick = (p1Selected) => () => {
+    const CPUchoice = getComputerChoice();
+    const result = determineWinner(p1Selected, CPUchoice);
+    setisSelected(true);
+    visiable(p1Selected);
+    console.log(result);
+  };
+
+  const visiable = (p1Selected) => {
+    const visRock = {
+      Rock: true,
+      Paper: false,
+      Scissors: false,
+    };
+    const visPaper = {
+      Rock: false,
+      Paper: true,
+      Scissors: false,
+    };
+    const visScissors = {
+      Rock: false,
+      Paper: false,
+      Scissors: true,
+    };
+    if (p1Selected === "Rock") {
+      return visRock;
+    } else if (p1Selected === "Paper") {
+      return visPaper;
     } else {
-      setWinner("Player");
+      return visScissors;
     }
   };
 
@@ -50,10 +57,12 @@ const Game = () => {
     <div>
       <Gameboard
         p1Click={p1Click}
-        onClick={() => handleClick}
+        onClick={handleClick}
         gbtitle="플레이어 선택"
+        cbtitle="컴퓨터 선택"
+        visialbe={visiable}
+        isSelected={isSelected}
       />
-      <Computerboard cbtitle="컴퓨터 선택" />
     </div>
   );
 };
