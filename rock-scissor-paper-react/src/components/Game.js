@@ -4,6 +4,13 @@ import Gameboard from "./Gameboard";
 const Game = () => {
   const [p1Click, setp1Click] = useState("");
   const [isSelected, setisSelected] = useState(false);
+  const vis = {
+    Rock: true,
+    Paper: true,
+    Scissors: true,
+  };
+  const [p1VisSelected, setP1VisSelected] = useState(vis);
+  const [CPUVisSelected, setCPUVisSelected] = useState(vis);
 
   const getComputerChoice = () => {
     const randomNumber = Math.floor(Math.random() * 3);
@@ -24,11 +31,11 @@ const Game = () => {
     const CPUchoice = getComputerChoice();
     const result = determineWinner(p1Selected, CPUchoice);
     setisSelected(true);
-    visiable(p1Selected);
-    console.log(result);
+    VisibleWhich(p1Selected, CPUchoice);
+    console.log(result, p1Selected);
   };
 
-  const visiable = (p1Selected) => {
+  const VisibleWhich = (p1Selected, CPUchoice) => {
     const visRock = {
       Rock: true,
       Paper: false,
@@ -44,13 +51,26 @@ const Game = () => {
       Paper: false,
       Scissors: true,
     };
+
     if (p1Selected === "Rock") {
-      return visRock;
+      setP1VisSelected(visRock);
     } else if (p1Selected === "Paper") {
-      return visPaper;
-    } else {
-      return visScissors;
+      setP1VisSelected(visPaper);
+    } else if (p1Selected === "Scissors") {
+      setP1VisSelected(visScissors);
     }
+
+    const computerChoosing = (CPUchoice) => {
+      if (CPUchoice === "Rock") {
+        setCPUVisSelected(visRock);
+      } else if (CPUchoice === "Paper") {
+        setCPUVisSelected(visPaper);
+      } else if (CPUchoice === "Scissors") {
+        setCPUVisSelected(visScissors);
+      }
+    };
+
+    setTimeout(() => computerChoosing(CPUchoice), 3000);
   };
 
   return (
@@ -60,7 +80,8 @@ const Game = () => {
         onClick={handleClick}
         gbtitle="플레이어 선택"
         cbtitle="컴퓨터 선택"
-        visialbe={visiable}
+        visP1Selected={p1VisSelected}
+        visCPUSelected={CPUVisSelected}
         isSelected={isSelected}
       />
     </div>
