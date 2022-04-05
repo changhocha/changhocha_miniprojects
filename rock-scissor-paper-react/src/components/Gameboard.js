@@ -2,15 +2,15 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useState } from "react";
 
-const Gameboard = ({ cbtitle, gbtitle, onClick, isSelected, visible }) => {
-  const vis = () => {
-    const notSelected = {
-      Rock: true,
-      Paper: true,
-      Scissors: true,
-    };
-    const visEnd = isSelected ? visible : notSelected;
-  };
+const Gameboard = ({
+  cbtitle,
+  gbtitle,
+  onClick,
+  visP1Selected,
+  visCPUSelected,
+}) => {
+  const visP1 = visP1Selected;
+  const visCPU = visCPUSelected;
 
   return (
     <section id="playerBoard" className="playerBoard">
@@ -30,7 +30,8 @@ const Gameboard = ({ cbtitle, gbtitle, onClick, isSelected, visible }) => {
             tabIndex="0"
             onClick={onClick("Rock")}
             style={{
-              display: viscon.Rock ? "block" : "none",
+              opacity: visP1.Rock ? "1" : "0",
+              transition: "all 500ms",
             }}
           />
         </div>
@@ -40,7 +41,10 @@ const Gameboard = ({ cbtitle, gbtitle, onClick, isSelected, visible }) => {
             alt="select paper"
             tabIndex="0"
             onClick={onClick("Paper")}
-            style={{ display: viscon.Paper ? "block" : "none" }}
+            style={{
+              opacity: visP1.Paper ? "1" : "0",
+              transition: "all 500ms",
+            }}
           />
         </div>
         <div id="scissors" className="gameboard__square">
@@ -49,7 +53,10 @@ const Gameboard = ({ cbtitle, gbtitle, onClick, isSelected, visible }) => {
             alt="select scissors"
             tabIndex="0"
             onClick={onClick("Scissors")}
-            style={{ display: viscon.Scissors ? "block" : "none" }}
+            style={{
+              opacity: visP1.Scissors ? "1" : "0",
+              transition: "all 500ms",
+            }}
           />
         </div>
       </div>
@@ -59,13 +66,34 @@ const Gameboard = ({ cbtitle, gbtitle, onClick, isSelected, visible }) => {
         </h2>
         <div id="cp_gameboard" className="gameboard">
           <div id="cp_rock" className="gameboard__square">
-            <img src="img/rock.png" alt="rock" />
+            <img
+              src="img/rock.png"
+              alt="rock"
+              style={{
+                opacity: visCPU.Rock ? "1" : "0",
+                transition: "all 50ms",
+              }}
+            />
           </div>
           <div id="cp_paper" className="gameboard__square">
-            <img src="img/paper.png" alt="paper" />
+            <img
+              src="img/paper.png"
+              alt="paper"
+              style={{
+                opacity: visCPU.Paper ? "1" : "0",
+                transition: "all 50ms",
+              }}
+            />
           </div>
           <div id="cp_scissors" className="gameboard__square">
-            <img src="img/scissors.png" alt="scissors" />
+            <img
+              src="img/scissors.png"
+              alt="scissors"
+              style={{
+                opacity: visCPU.Scissors ? "1" : "0",
+                transition: "all 50ms",
+              }}
+            />
           </div>
         </div>
       </section>

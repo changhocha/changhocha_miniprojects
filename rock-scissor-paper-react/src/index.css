@@ -310,6 +310,24 @@ abbr {
   -webkit-animation: fadeInFromNone 1s ease-in;
   animation: fadeInFromNone 1s ease-in;
 }
+
+.gameboard .gameboard__square img {
+  animation: 0.7s ease-in-out loadEffect1;
+}
+
+@keyframes loadEffect1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeOut {
+  animation: 0.7s ease-in-out loadEffect1;
+}
+
 @media only screen and (min-width: 768px) {
   .gameboard .gameboard__square p {
     font-size: 6rem;
