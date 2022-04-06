@@ -14,7 +14,10 @@ const Game = () => {
   const [CPUVisSelected, setCPUVisSelected] = useState(vis);
   const [cbtitle, setCbtitle] = useState("CPU Chooses...");
   const [p1title, setP1title] = useState("You Chooses...");
+<<<<<<< HEAD
   const [btnDisplay, setBtnDisplay] = useState("hidden");
+=======
+>>>>>>> b5886beb5c31949a57c7b04296652aab8ff62b43
 
   const getComputerChoice = () => {
     const randomNumber = Math.floor(Math.random() * 3);
@@ -84,6 +87,7 @@ const Game = () => {
     setTimeout(() => setCbtitle("2"), 1000);
     setTimeout(() => setCbtitle("1"), 2000);
     setTimeout(() => setCbtitle(`CPU Chooses... ${CPUchoice}!`), 3000);
+<<<<<<< HEAD
 
     if (result === "Tie") {
       setTimeout(() => setCbtitle("Tie Game!"), 5000);
@@ -94,6 +98,8 @@ const Game = () => {
     }
 
     setTimeout(() => setBtnDisplay(""), 5500);
+=======
+>>>>>>> b5886beb5c31949a57c7b04296652aab8ff62b43
   };
 
   const showP1Selected = (p1Selected) => {
