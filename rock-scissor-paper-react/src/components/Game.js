@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Gameboard from "./Gameboard";
+import Playagain from "./Playagain";
 
 const Game = () => {
   const [p1Click, setp1Click] = useState("");
@@ -11,6 +12,9 @@ const Game = () => {
   };
   const [p1VisSelected, setP1VisSelected] = useState(vis);
   const [CPUVisSelected, setCPUVisSelected] = useState(vis);
+  const [cbtitle, setCbtitle] = useState("CPU Chooses...");
+  const [p1title, setP1title] = useState("You Chooses...");
+  const [btnDisplay, setBtnDisplay] = useState("hidden");
 
   const getComputerChoice = () => {
     const randomNumber = Math.floor(Math.random() * 3);
@@ -32,6 +36,8 @@ const Game = () => {
     const result = determineWinner(p1Selected, CPUchoice);
     setisSelected(true);
     VisibleWhich(p1Selected, CPUchoice);
+    countDown(result, CPUchoice);
+    showP1Selected(p1Selected);
     console.log(result, p1Selected);
   };
 
@@ -73,17 +79,45 @@ const Game = () => {
     setTimeout(() => computerChoosing(CPUchoice), 3000);
   };
 
+  const countDown = (result, CPUchoice) => {
+    setCbtitle("3");
+    setTimeout(() => setCbtitle("2"), 1000);
+    setTimeout(() => setCbtitle("1"), 2000);
+    setTimeout(() => setCbtitle(`CPU Chooses... ${CPUchoice}!`), 3000);
+
+    if (result === "Tie") {
+      setTimeout(() => setCbtitle("Tie Game!"), 5000);
+    } else if (result === "Player") {
+      setTimeout(() => setCbtitle("You Win!"), 5000);
+    } else if (result === "Computer") {
+      setTimeout(() => setCbtitle("Computer Win!"), 5000);
+    }
+
+    setTimeout(() => setBtnDisplay(""), 5500);
+  };
+
+  const showP1Selected = (p1Selected) => {
+    if (p1Selected === "Rock") {
+      setP1title("You Chooses... Rock!");
+    } else if (p1Selected === "Paper") {
+      setP1title("You Chooses... Paper!");
+    } else if (p1Selected === "Scissors") {
+      setP1title("You Chooses... Scissors!");
+    }
+  };
+
   return (
     <div>
       <Gameboard
         p1Click={p1Click}
         onClick={handleClick}
-        gbtitle="플레이어 선택"
-        cbtitle="컴퓨터 선택"
+        gbtitle={p1title}
+        cbtitle={cbtitle}
         visP1Selected={p1VisSelected}
         visCPUSelected={CPUVisSelected}
         isSelected={isSelected}
       />
+      <Playagain display={btnDisplay} />
     </div>
   );
 };

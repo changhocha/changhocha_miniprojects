@@ -30,7 +30,8 @@ const Gameboard = ({
             tabIndex="0"
             onClick={onClick("Rock")}
             style={{
-              display: visP1.Rock ? "block" : "none",
+              opacity: visP1.Rock ? "1" : "0",
+              transition: "all 500ms",
             }}
           />
         </div>
@@ -40,7 +41,10 @@ const Gameboard = ({
             alt="select paper"
             tabIndex="0"
             onClick={onClick("Paper")}
-            style={{ display: visP1.Paper ? "block" : "none" }}
+            style={{
+              opacity: visP1.Paper ? "1" : "0",
+              transition: "all 500ms",
+            }}
           />
         </div>
         <div id="scissors" className="gameboard__square">
@@ -49,7 +53,10 @@ const Gameboard = ({
             alt="select scissors"
             tabIndex="0"
             onClick={onClick("Scissors")}
-            style={{ display: visP1.Scissors ? "block" : "none" }}
+            style={{
+              opacity: visP1.Scissors ? "1" : "0",
+              transition: "all 500ms",
+            }}
           />
         </div>
       </div>
@@ -63,7 +70,8 @@ const Gameboard = ({
               src="img/rock.png"
               alt="rock"
               style={{
-                display: visCPU.Rock ? "block" : "none",
+                opacity: visCPU.Rock ? "1" : "0",
+                transition: "all 50ms",
               }}
             />
           </div>
@@ -72,7 +80,8 @@ const Gameboard = ({
               src="img/paper.png"
               alt="paper"
               style={{
-                display: visCPU.Paper ? "block" : "none",
+                opacity: visCPU.Paper ? "1" : "0",
+                transition: "all 50ms",
               }}
             />
           </div>
@@ -81,7 +90,8 @@ const Gameboard = ({
               src="img/scissors.png"
               alt="scissors"
               style={{
-                display: visCPU.Scissors ? "block" : "none",
+                opacity: visCPU.Scissors ? "1" : "0",
+                transition: "all 50ms",
               }}
             />
           </div>
