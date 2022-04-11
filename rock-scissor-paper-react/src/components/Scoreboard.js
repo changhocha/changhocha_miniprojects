@@ -20,20 +20,6 @@ const Scoreboard = ({ addScore }) => {
   const p1Score = window.localStorage.getItem("p1Score");
   const CPUScore = window.localStorage.getItem("CPUScore");
 
-  const addCurrScore = () => {
-    let currP1Score = 0;
-    let currCPUScore = 0;
-
-    if (addScore === true) {
-      let currP1Score = 0;
-      currP1Score = +1;
-    } else if (p1Wins === false) {
-      currCPUScore += 1;
-    }
-  };
-
-  addCurrScore();
-
   return (
     <section className="scoreboard">
       <h2 className="offscreen">Scoreboard</h2>

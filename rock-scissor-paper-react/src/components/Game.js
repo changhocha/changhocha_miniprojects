@@ -110,7 +110,16 @@ const Game = () => {
     }
   };
 
-  console.log(scoreWinner);
+  const initGame = () => {
+    setp1Click("");
+    setisSelected(false);
+    setP1VisSelected(vis);
+    setCPUVisSelected(vis);
+    setCbtitle("CPU Chooses...");
+    setP1title("You Chooses...");
+    setScoreWinner("");
+    setBtnDisplay("hidden");
+  };
 
   return (
     <div>
@@ -124,7 +133,7 @@ const Game = () => {
         visCPUSelected={CPUVisSelected}
         isSelected={isSelected}
       />
-      <Playagain display={btnDisplay} />
+      <Playagain display={btnDisplay} onClick={initGame} />
     </div>
   );
 };
