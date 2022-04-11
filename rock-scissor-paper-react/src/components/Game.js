@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Gameboard from "./Gameboard";
 import Playagain from "./Playagain";
+import Scoreboard from "./Scoreboard";
 
 const Game = () => {
   const [p1Click, setp1Click] = useState("");
@@ -14,10 +15,8 @@ const Game = () => {
   const [CPUVisSelected, setCPUVisSelected] = useState(vis);
   const [cbtitle, setCbtitle] = useState("CPU Chooses...");
   const [p1title, setP1title] = useState("You Chooses...");
-<<<<<<< HEAD
   const [btnDisplay, setBtnDisplay] = useState("hidden");
-=======
->>>>>>> b5886beb5c31949a57c7b04296652aab8ff62b43
+  const [scoreWinner, setScoreWinner] = useState("");
 
   const getComputerChoice = () => {
     const randomNumber = Math.floor(Math.random() * 3);
@@ -87,19 +86,18 @@ const Game = () => {
     setTimeout(() => setCbtitle("2"), 1000);
     setTimeout(() => setCbtitle("1"), 2000);
     setTimeout(() => setCbtitle(`CPU Chooses... ${CPUchoice}!`), 3000);
-<<<<<<< HEAD
 
     if (result === "Tie") {
       setTimeout(() => setCbtitle("Tie Game!"), 5000);
     } else if (result === "Player") {
+      setTimeout(() => setScoreWinner("p1"), 5000);
       setTimeout(() => setCbtitle("You Win!"), 5000);
     } else if (result === "Computer") {
+      setTimeout(() => setScoreWinner("CPU"), 5000);
       setTimeout(() => setCbtitle("Computer Win!"), 5000);
     }
 
     setTimeout(() => setBtnDisplay(""), 5500);
-=======
->>>>>>> b5886beb5c31949a57c7b04296652aab8ff62b43
   };
 
   const showP1Selected = (p1Selected) => {
@@ -112,8 +110,11 @@ const Game = () => {
     }
   };
 
+  console.log(scoreWinner);
+
   return (
     <div>
+      <Scoreboard addScore={scoreWinner} />
       <Gameboard
         p1Click={p1Click}
         onClick={handleClick}

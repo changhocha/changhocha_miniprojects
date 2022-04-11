@@ -1,4 +1,39 @@
-const Scoreboard = () => {
+import React, { useState } from "react";
+
+const Scoreboard = ({ addScore }) => {
+  const saveData = () => {
+    if (window.localStorage.getItem("p1Score") === null) {
+      window.localStorage.setItem("p1Score", "0");
+    } else if (window.localStorage.getItem("CPUScore") === null) {
+      window.localStorage.setItem("CPUScore", "0");
+    }
+
+    if (addScore === "p1") {
+      window.localStorage.setItem("p1Score", +1);
+    } else if (addScore === "CPU") {
+      window.localStorage.setItem("CPUScore", +1);
+    }
+  };
+
+  saveData();
+
+  const p1Score = window.localStorage.getItem("p1Score");
+  const CPUScore = window.localStorage.getItem("CPUScore");
+
+  const addCurrScore = () => {
+    let currP1Score = 0;
+    let currCPUScore = 0;
+
+    if (addScore === true) {
+      let currP1Score = 0;
+      currP1Score = +1;
+    } else if (p1Wins === false) {
+      currCPUScore += 1;
+    }
+  };
+
+  addCurrScore();
+
   return (
     <section className="scoreboard">
       <h2 className="offscreen">Scoreboard</h2>
@@ -8,7 +43,7 @@ const Scoreboard = () => {
           <p>
             <abbr title="Player One">P1</abbr>
           </p>
-          <p>전체 점수</p>
+          <p>All Time</p>
           <p>
             <abbr title="Computer Player">CP</abbr>
           </p>
@@ -21,7 +56,7 @@ const Scoreboard = () => {
             aria-label="Player One All Time Wins"
             tabIndex="0"
           >
-            0
+            {p1Score}
           </div>
           <div
             id="cp_all_time_score"
@@ -30,7 +65,7 @@ const Scoreboard = () => {
             aria-label="Computer Player All Time Wins"
             tabIndex="0"
           >
-            0
+            {CPUScore}
           </div>
         </div>
       </section>
@@ -40,7 +75,7 @@ const Scoreboard = () => {
           <p>
             <abbr title="Player One">P1</abbr>
           </p>
-          <p>현재 점수</p>
+          <p>Current</p>
           <p>
             <abbr title="Computer Player">CP</abbr>
           </p>

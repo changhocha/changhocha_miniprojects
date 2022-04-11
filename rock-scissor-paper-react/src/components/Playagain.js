@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 
-const Playagain = (display) => {
-  console.log(display);
-
+const Playagain = ({ display }) => {
   return (
-    <button
-      id="playAgain"
-      type="submit"
-      className={`playAgain ${display.display}`}
-    >
+    <button id="playAgain" type="submit" className={`playAgain ${display}`}>
       Play Again?
     </button>
   );
