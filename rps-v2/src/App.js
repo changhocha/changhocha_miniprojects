@@ -1,13 +1,13 @@
 import "./App.css";
 import Header from "./Components/Header";
-import Gameboard from "./Components/Gameboard";
+import Game from "./Components/Game";
 
 function App() {
   return (
     <main>
       <div className="container">
         <Header title="Rock Paper Scissors" />
-        <Gameboard />
+        <Game />
       </div>
     </main>
   );
