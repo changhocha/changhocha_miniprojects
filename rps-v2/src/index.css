@@ -6,12 +6,19 @@
 
 html {
   font-size: 22px;
+<<<<<<< HEAD
   color: white;
+=======
+>>>>>>> e91d8504b6431243bf08f6bb02f9b8d4afe7e23b
 }
 
 body {
   min-height: 100vh;
+<<<<<<< HEAD
   background-color: slategrey;
+=======
+  background-color: lightsalmon;
+>>>>>>> e91d8504b6431243bf08f6bb02f9b8d4afe7e23b
 }
 
 @media only screen and (min-width: 768px) {
@@ -37,6 +44,7 @@ main {
   align-items: center;
   flex-wrap: wrap;
 }
+<<<<<<< HEAD
 
 @media only screen and (min-width: 800px) {
   .scoreboard {
@@ -146,3 +154,5 @@ main {
 .fadeOut {
   animation: 0.7s ease-in-out loadEffect1;
 }
+=======
+>>>>>>> e91d8504b6431243bf08f6bb02f9b8d4afe7e23b
