@@ -4,7 +4,6 @@ const useDidMountEffect = (func, deps) => {
   const didMount = useRef(false);
 
   useEffect(() => {
-    console.log(didMount.current);
     if (didMount.current === true) func();
     else didMount.current = true;
   }, deps);
