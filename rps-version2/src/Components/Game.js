@@ -16,6 +16,9 @@ const Game = () => {
     const cpuChoice = chooseRandom();
     setChoice([playerChoice, cpuChoice]);
   };
+  const handleinitclick = (e) => {
+    setChoice([null, null]);
+  };
 
   return (
     <div>
@@ -23,6 +26,7 @@ const Game = () => {
         p1Choice={choice[0]}
         cpuChoice={choice[1]}
         handleClick={handleClick}
+        handleinitclick={handleinitclick}
       />
     </div>
   );

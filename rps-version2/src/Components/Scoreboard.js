@@ -1,6 +1,6 @@
 import React from "react";
 
-const Scoreboard = ({ winner }) => {
+const Scoreboard = ({ winner, alert }) => {
   const [playerWinCount, setPlayerWinCount] = React.useState(0);
   const [cpuWinCount, setCpuWinCount] = React.useState(0);
   React.useEffect(() => {

@@ -1,7 +1,13 @@
 import React from "react";
 
-const Initbutton = ({ handleInitClick }) => {
-  return <button onClick={handleInitClick}>Play Again?</button>;
+const Initbutton = ({ alert, handleinitclick }) => {
+  return (
+    <div>
+      {alert === true ? (
+        <button onClick={handleinitclick}>Play Again?</button>
+      ) : null}
+    </div>
+  );
 };
 
 export default Initbutton;
