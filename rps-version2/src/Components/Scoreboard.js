@@ -6,7 +6,7 @@ const Scoreboard = ({ winner, alert }) => {
   React.useEffect(() => {
     if (winner === "Player") setPlayerWinCount(playerWinCount + 1);
     if (winner === "Computer") setCpuWinCount(cpuWinCount + 1);
-  }, [winner]);
+  }, [alert]);
 
   return (
     <h2>

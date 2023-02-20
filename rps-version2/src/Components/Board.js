@@ -24,13 +24,16 @@ const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
   const isGameStarted = p1Choice !== null && cpuChoice !== null;
   const renLater = alert === true;
   useEffect(() => {
-    if (isGameStarted) {
+    if (alert === true) {
+      setAlert(false);
+    } else if (isGameStarted) {
       const timeout = setTimeout(() => {
         setAlert(true);
         return clearTimeout(timeout);
       }, 2000);
     }
   }, [p1Choice]);
+
   return (
     <div>
       <div className="Board">
