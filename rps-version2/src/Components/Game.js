@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import Board from "./Board";
+import { postReducer } from "../postReducer/postReducer";
 
 const chooseRandom = () => {
   const choice = ["Rock", "Paper", "Scissors"];
@@ -10,14 +11,18 @@ const chooseRandom = () => {
 };
 
 const Game = () => {
-  const [choice, setChoice] = useState([null, null]);
+  const [choice, dispatch] = useReducer(postReducer, [null, null]);
+  React.useEffect(() => {
+    console.log(choice);
+  });
+
   const handleClick = (e) => {
     const playerChoice = e.target.id;
     const cpuChoice = chooseRandom();
-    setChoice([playerChoice, cpuChoice]);
+    dispatch({ type: "SET_CHOICE", payload: [playerChoice, cpuChoice] });
   };
-  const handleinitclick = (e) => {
-    setChoice([null, null]);
+  const handleinitclick = () => {
+    dispatch({ type: "INIT_CHOICE" });
   };
 
   return (

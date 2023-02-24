@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import Choice from "./Choice";
 import Scoreboard from "./Scoreboard";
 import Initbutton from "./Initbutton";
+import { postReducer } from "../postReducer/postReducer";
 
 //calculate winner based on p1Choice and cpuChoice
 function calculateWinner(p1Choice, cpuChoice) {
@@ -18,21 +19,25 @@ function calculateWinner(p1Choice, cpuChoice) {
   }
 }
 const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
-  const [alert, setAlert] = useState(false);
+  const [alert, dispatch] = useReducer(postReducer, null);
   const winner = calculateWinner(p1Choice, cpuChoice);
-  console.log(winner, p1Choice, cpuChoice);
   const isGameStarted = p1Choice !== null && cpuChoice !== null;
   const renLater = alert === true;
+
   useEffect(() => {
     if (alert === true) {
-      setAlert(false);
+      dispatch({ type: "SET_ALERT", payload: false });
     } else if (isGameStarted) {
       const timeout = setTimeout(() => {
-        setAlert(true);
+        dispatch({ type: "SET_ALERT", payload: true });
         return clearTimeout(timeout);
       }, 2000);
     }
   }, [p1Choice]);
+
+  useEffect(() => {
+    console.log(isGameStarted, alert);
+  });
 
   return (
     <div>
