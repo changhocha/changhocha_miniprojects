@@ -2,9 +2,11 @@ import React from "react";
 
 const Initbutton = ({ alert, handleinitclick }) => {
   return (
-    <div>
+    <div className="again-container">
       {alert === true ? (
-        <button onClick={handleinitclick}>Play Again?</button>
+        <div className="again" onClick={handleinitclick}>
+          Play Again?
+        </div>
       ) : null}
     </div>
   );

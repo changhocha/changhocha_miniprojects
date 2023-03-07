@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import Board from "./Board";
 import { postReducer } from "../postReducer/postReducer";
+import "./Game.css";
 
 const chooseRandom = () => {
   const choice = ["Rock", "Paper", "Scissors"];

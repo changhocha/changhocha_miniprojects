@@ -20,6 +20,7 @@ function calculateWinner(p1Choice, cpuChoice) {
 }
 const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
   const [alert, dispatch] = useReducer(postReducer, null);
+  const [attacker, attackerDis] = useReducer(postReducer, null);
   const winner = calculateWinner(p1Choice, cpuChoice);
   const isGameStarted = p1Choice !== null && cpuChoice !== null;
   const renLater = alert === true;
@@ -28,6 +29,7 @@ const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
     if (alert === true) {
       dispatch({ type: "SET_ALERT", payload: false });
     } else if (isGameStarted) {
+      attackerDis({ type: "SET_ATTACKER", payload: winner });
       const timeout = setTimeout(() => {
         dispatch({ type: "SET_ALERT", payload: true });
         return clearTimeout(timeout);
@@ -36,30 +38,30 @@ const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
   }, [p1Choice]);
 
   useEffect(() => {
-    console.log(isGameStarted, alert);
+    console.log(attacker);
   });
 
   return (
     <div>
       <div className="Board">
-        <h1>Rock Paper Scissors</h1>
         <Scoreboard winner={winner} alert={alert} />
-        <h3>Player Chooses...{p1Choice}</h3>
-        <div className="p1Board">
-          <Choice value="Rock" handleClick={handleClick} />
-          <Choice value="Paper" handleClick={handleClick} />
-          <Choice value="Scissors" handleClick={handleClick} />
-        </div>
-        <h3>Cpu Chooses...{renLater ? cpuChoice : null}</h3>
         <div className="cpuBoard">
-          <Choice value="Rock" handleClick={null} />
-          <Choice value="Paper" handleClick={null} />
-          <Choice value="Scissors" handleClick={null} />
+          {" "}
+          <div className="cpuChoice">{renLater ? cpuChoice : null}</div>
         </div>
-        {isGameStarted && renLater && (
-          <h3>{winner === "Tie" ? "Tie Game" : winner + "Win!"}</h3>
-        )}
-        <Initbutton alert={alert} handleinitclick={handleinitclick} />
+
+        <div className="middle">
+          {" "}
+          {isGameStarted && renLater && (
+            <h3>{winner === "Tie" ? "Tie Game" : winner + "Win!"}</h3>
+          )}
+          <Initbutton alert={alert} handleinitclick={handleinitclick} />
+        </div>
+      </div>
+      <div className="p1Board">
+        <Choice value="Rock" handleClick={handleClick} />
+        <Choice value="Paper" handleClick={handleClick} />
+        <Choice value="Scissors" handleClick={handleClick} />
       </div>
     </div>
   );

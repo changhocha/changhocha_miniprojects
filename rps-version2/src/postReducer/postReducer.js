@@ -8,5 +8,7 @@ export const postReducer = (state, action) => {
       return action.payload;
     case "SET_WINCOUNT":
       return state + 1;
+    case "SET_ATTACKER":
+      return action.payload;
   }
 };

@@ -1,53 +1,97 @@
 * {
   padding: 0;
   margin: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  box-sizing: content-box;
 }
 
 html {
-  font-family: "Montserrat", sans-serif;
-  font-size: 22px;
-  color: white;
+  display: inline-block;
+  height: 753.6px;
+  background-color: black;
 }
 
 body {
-  min-height: 100vh;
-  background-color: #11161f;
+  display: inline;
 }
 
-@media only screen and (min-width: 768px) {
-  body {
-    font-size: 36px;
-  }
+h3 {
+  display: inline;
+  color: azure;
 }
 
-main {
-  max-width: 800px;
-  margin: 0 auto;
-  height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+.p1Score,
+.cpuScore {
+  font-size: 50px;
+  display: inline;
+  color: azure;
 }
-h1 {
-  margin: 0.5rem 0;
+
+.p1Score {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
-@media only screen and (min-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
+
+.cpuScore {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-h2 {
-  margin: 0.5rem 0;
-  font-size: 0.85rem;
+
+.cpuBoard {
+  display: block;
+  text-align: center;
+  padding-top: 50px;
 }
-@media only screen and (min-width: 768px) {
-  h2 {
-    font-size: 1.5rem;
-  }
+
+.cpuChoice {
+  margin-right: 0px;
+  text-align: center;
+  font-size: 30pt;
+  display: inline-block;
+  width: 150px;
+  height: 250px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.middle {
+  margin-top: 45.8px;
+  margin-bottom: 45.8px;
+  display: block;
+  height: 50px;
+  text-align: center;
+}
+
+.again-container {
+  text-align: center;
+}
+
+.again {
+  display: inline;
+  color: azure;
+}
+
+.choice {
+  font-size: 30pt;
+  display: inline-block;
+  text-align: center;
+  width: 150px;
+  height: 250px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.p1Board {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 50px;
+  display: grid;
+  grid-template-columns: 150px 150px 150px;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  gap: 10px 30px;
 }
