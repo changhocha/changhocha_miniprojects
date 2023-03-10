@@ -27,14 +27,12 @@ const Game = () => {
   };
 
   return (
-    <div>
-      <Board
-        p1Choice={choice[0]}
-        cpuChoice={choice[1]}
-        handleClick={handleClick}
-        handleinitclick={handleinitclick}
-      />
-    </div>
+    <Board
+      p1Choice={choice[0]}
+      cpuChoice={choice[1]}
+      handleClick={handleClick}
+      handleinitclick={handleinitclick}
+    />
   );
 };
 

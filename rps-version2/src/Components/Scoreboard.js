@@ -13,9 +13,9 @@ const Scoreboard = ({ winner, alert }) => {
   }, [alert]);
 
   return (
-    <div>
-      <div className="cpuScore">CPU({cpuWinCount})</div>
-      <div className="p1Score">p1({playerWinCount})</div>
+    <div className="scoreBoard">
+      <div className="cpuScore">{cpuWinCount}</div>
+      <div className="p1Score">{playerWinCount}</div>
     </div>
   );
 };

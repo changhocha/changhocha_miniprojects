@@ -42,22 +42,21 @@ const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
   });
 
   return (
-    <div>
-      <div className="Board">
-        <Scoreboard winner={winner} alert={alert} />
-        <div className="cpuBoard">
-          {" "}
-          <div className="cpuChoice">{renLater ? cpuChoice : null}</div>
-        </div>
-
-        <div className="middle">
-          {" "}
-          {isGameStarted && renLater && (
-            <h3>{winner === "Tie" ? "Tie Game" : winner + "Win!"}</h3>
-          )}
-          <Initbutton alert={alert} handleinitclick={handleinitclick} />
-        </div>
+    <div className="board">
+      <Scoreboard winner={winner} alert={alert} />
+      <div className="cpuBoard">
+        {" "}
+        <div className="cpuChoice">{renLater ? cpuChoice : null}</div>
       </div>
+
+      <div className="middle">
+        {" "}
+        {isGameStarted && renLater && (
+          <div>{winner === "Tie" ? "Tie Game" : winner + "Win!"}</div>
+        )}
+        <Initbutton alert={alert} handleinitclick={handleinitclick} />
+      </div>
+
       <div className="p1Board">
         <Choice value="Rock" handleClick={handleClick} />
         <Choice value="Paper" handleClick={handleClick} />

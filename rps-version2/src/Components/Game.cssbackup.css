@@ -1,10 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
-
 * {
   padding: 0;
   margin: 0;
   box-sizing: content-box;
-  font-family: "Quicksand", sans-serif;
 }
 
 html {
@@ -33,50 +30,42 @@ body {
   background-color: black;
 }
 
-.scoreBoard {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
 .p1Score,
 .cpuScore {
   font-size: 15vw;
   display: inline-block;
+  height: 150px;
   color: azure;
+  line-height: 90%;
 }
 
 .p1Score {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   right: 0;
 }
 
 .cpuScore {
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 0;
 }
 
 .cpuBoard {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
   display: block;
   text-align: center;
-  margin-top: 3vh;
 }
 
 .cpuChoice {
   margin-right: 0px;
   text-align: center;
-  font-size: 5vmin;
+  font-size: 30pt;
   display: inline-block;
   width: 20vmin;
   height: 35vmin;
   background-color: white;
-  border-radius: 2vmin;
+  border-radius: 15px;
+  margin-top: 50px;
 }
 
 .middle {
@@ -84,9 +73,9 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 50px;
   text-align: center;
   color: azure;
-  font-size: 3vmin;
 }
 
 .again-container {
@@ -99,13 +88,13 @@ body {
 }
 
 .choice {
-  font-size: 5vmin;
+  font-size: 30pt;
   display: inline-block;
   text-align: center;
   width: 20vmin;
   height: 35vmin;
   background-color: white;
-  border-radius: 2vmin;
+  border-radius: 15px;
 }
 
 .p1Board {
@@ -113,23 +102,11 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  margin-bottom: 3vh;
+  padding-bottom: 50px;
   display: grid;
-  grid-template-columns: 20vh 20vh 20vh;
+  grid-template-columns: 20vmin 20vmin 20vmin;
   justify-content: center;
   align-items: center;
-  gap: 2vw;
-}
-
-@media (orientation: portrait) {
-  .choice {
-    height: 35vmin;
-  }
-  .cpuBoard {
-    margin-top: calc(28vh - 25vw);
-  }
-  .p1Board {
-    margin-bottom: calc(28vh - 25vw);
-    grid-template-columns: 20vw 20vw 20vw;
-  }
+  justify-self: center;
+  gap: 10px 30px;
 }
