@@ -30,7 +30,7 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: orangered;
 }
 
 .scoreBoard {
@@ -66,17 +66,52 @@ body {
   display: block;
   text-align: center;
   margin-top: 3vh;
+  perspective: 1000px;
 }
 
-.cpuChoice {
-  margin-right: 0px;
+.cpuChoice,
+.backCard {
+  position: absolute;
+  right: 50%;
+  left: 50%;
+  margin-left: -10vmin;
   text-align: center;
   font-size: 5vmin;
+  line-height: 600%;
   display: inline-block;
   width: 20vmin;
   height: 35vmin;
   background-color: white;
   border-radius: 2vmin;
+  transition: transform 0.6s ease;
+  backface-visibility: hidden;
+}
+
+.cpuChoice {
+  transform: rotateY(180deg);
+}
+
+.backCard {
+  box-shadow: 0 0 0 1vmin white inset;
+  background-color: black;
+}
+
+#flippingFront {
+  transform: rotateY(130deg);
+  transition: transform 2s ease-out;
+}
+
+#flippingBack {
+  transform: rotateY(-50deg);
+  transition: transform 2s ease-out;
+}
+
+#openFront {
+  transform: rotateY(0deg);
+}
+
+#openBack {
+  transform: rotateY(-180deg);
 }
 
 .middle {
@@ -91,17 +126,20 @@ body {
 
 .again-container {
   text-align: center;
+  margin-top: 10%;
 }
 
 .again {
   display: inline;
-  color: azure;
+  color: black;
+  background-color: azure;
 }
 
 .choice {
   font-size: 5vmin;
   display: inline-block;
   text-align: center;
+  line-height: 600%;
   width: 20vmin;
   height: 35vmin;
   background-color: white;

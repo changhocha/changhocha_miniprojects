@@ -46,7 +46,28 @@ const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
       <Scoreboard winner={winner} alert={alert} />
       <div className="cpuBoard">
         {" "}
-        <div className="cpuChoice">{renLater ? cpuChoice : null}</div>
+        <div
+          className="cpuChoice"
+          id={
+            isGameStarted && alert
+              ? "openFront"
+              : isGameStarted
+              ? "flippingFront"
+              : "closed"
+          }
+        >
+          {renLater ? cpuChoice : null}
+        </div>
+        <div
+          className="backCard"
+          id={
+            isGameStarted && alert
+              ? "openBack"
+              : isGameStarted
+              ? "flippingBack"
+              : "closed"
+          }
+        ></div>
       </div>
 
       <div className="middle">
