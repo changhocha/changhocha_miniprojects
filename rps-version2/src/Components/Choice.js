@@ -1,10 +1,10 @@
 import React from "react";
 
-const Choice = ({ value, handleClick }) => {
+const Choice = ({ value, handleClick, radio }) => {
   return (
-    <div className={"choice"} id={value} onClick={handleClick}>
+    <label for={radio} className={"choice"} id={value} onClick={handleClick}>
       {value}
-    </div>
+    </label>
   );
 };
 

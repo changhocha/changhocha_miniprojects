@@ -79,10 +79,17 @@ const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
       </div>
 
       <div className="p1Board">
-        <Choice value="Rock" handleClick={handleClick} />
-        <Choice value="Paper" handleClick={handleClick} />
-        <Choice value="Scissors" handleClick={handleClick} />
+        <Choice radio="rock-radio" value="Rock" handleClick={handleClick} />
+        <Choice radio="paper-radio" value="Paper" handleClick={handleClick} />
+        <Choice
+          radio="scissors-radio"
+          value="Scissors"
+          handleClick={handleClick}
+        />
       </div>
+      <input type="radio" name="p1Choice" id="rock-radio"></input>
+      <input type="radio" name="p1Choice" id="paper-radio"></input>
+      <input type="radio" name="p1Choice" id="scissors-radio"></input>
     </div>
   );
 };
