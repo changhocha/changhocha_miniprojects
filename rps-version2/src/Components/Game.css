@@ -93,6 +93,7 @@ input {
   border-radius: 2vmin;
   transition: transform 0.6s ease;
   backface-visibility: hidden;
+  box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.2);
 }
 
 .cpuChoice {
@@ -106,12 +107,12 @@ input {
 
 #flippingFront {
   transform: rotateY(130deg);
-  transition: transform 2s ease-out;
+  transition: transform 3s ease-out;
 }
 
 #flippingBack {
   transform: rotateY(-50deg);
-  transition: transform 2s ease-out;
+  transition: transform 3s ease-out;
 }
 
 #openFront {
@@ -130,6 +131,7 @@ input {
   text-align: center;
   color: azure;
   font-size: 3vmin;
+  transition: 0.5s ease;
 }
 
 .again-container {
@@ -144,6 +146,7 @@ input {
 }
 
 .choice {
+  position: relative;
   font-size: 5vmin;
   display: inline-block;
   text-align: center;
@@ -152,50 +155,62 @@ input {
   height: 35vmin;
   background-color: white;
   border-radius: 2vmin;
-  animation-duration: 0.2s;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards;
+  box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.2);
+  transition: transform 0.4s, box-shadow 0.4s, z-index 0.5s;
 }
 
-#Rock:hover {
-  z-index: 1;
-  animation-name: hover-rock;
-}
-#Rock:not(:hover) {
-  z-index: 1;
-  animation-name: not-hover;
-  animation-direction: reverse;
+.choice.Rock {
+  z-index: 4;
 }
 
-#Rock:hover ~ .choice {
+.choice.Paper {
+  z-index: 3;
+}
+
+.choice.Scissors {
+  z-index: 4;
+}
+
+.choice.active {
+  z-index: 5;
+  box-shadow: 2vmin 5vmin 2vmin 2vmin rgb(0, 0, 0, 0.2);
+  transform: translateY(-5vmin) scale(1.2);
+  transition: transform 0.4s box-shadow 0.4s;
+}
+
+.choice.moveAnim-Rock,
+.choice.moveAnim-Paper-right {
+  transform: translateX(5vmin);
+}
+
+.choice.moveAnim-Scissors,
+.choice.moveAnim-Paper-left {
   transform: translateX(-5vmin);
-  transition: transform 0.3s ease-in-out;
 }
 
-#Rock:not(:hover) ~ .choice {
-  transition: 0.3s ease-in-out;
+.choice.clicked-Rock {
+  z-index: 5;
+  box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.2);
+  transform: translateX(calc(2vw + 20vh));
+  transition: transform 0.6s box-shadow 0.6s;
 }
 
-@keyframes hover-rock {
-  0% {
-    transform: scale(1);
-    box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.2);
-  }
-  to {
-    box-shadow: 2vmin 5vmin 2vmin 2vmin rgb(0, 0, 0, 0.2);
-    transform: translateY(-5vmin) scale(1.2);
-  }
+.choice.clicked-Paper {
+  z-index: 5;
+  box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.2);
+  transition: transform 0.6s box-shadow 0.6s;
 }
 
-@keyframes not-hover {
-  0% {
-    transform: scale(1);
-    box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.2);
-  }
-  to {
-    box-shadow: 2vmin 5vmin 2vmin 2vmin rgb(0, 0, 0, 0.2);
-    transform: translateY(-5vmin) scale(1.2);
-  }
+.choice.clicked-Scissors {
+  z-index: 5;
+  box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.2);
+  transform: translateX(calc(-2vw + -20vh));
+  transition: transform 0.6s box-shadow 0.6s;
+}
+
+.choice.hide-card {
+  transform: translateY(100vmin);
+  transition: transform 0.6s;
 }
 
 .p1Board {

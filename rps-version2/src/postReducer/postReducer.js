@@ -10,5 +10,7 @@ export const postReducer = (state, action) => {
       return state + 1;
     case "SET_ATTACKER":
       return action.payload;
+    case "SET_HOVER":
+      return action.payload;
   }
 };

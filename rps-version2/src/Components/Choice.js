@@ -1,10 +1,22 @@
-import React from "react";
+import { React } from "react";
 
-const Choice = ({ value, handleClick, radio }) => {
+const Choice = ({
+  value,
+  handleClick,
+  className,
+  handleHover,
+  handleLeave,
+}) => {
   return (
-    <label for={radio} className={"choice"} id={value} onClick={handleClick}>
+    <div
+      className={className}
+      id={value}
+      onClick={handleClick}
+      onMouseOver={handleHover}
+      onMouseLeave={handleLeave}
+    >
       {value}
-    </label>
+    </div>
   );
 };
 

@@ -21,9 +21,37 @@ function calculateWinner(p1Choice, cpuChoice) {
 const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
   const [alert, dispatch] = useReducer(postReducer, null);
   const [attacker, attackerDis] = useReducer(postReducer, null);
+  const [hovered, hoverDispatch] = useReducer(postReducer, ["", false]);
   const winner = calculateWinner(p1Choice, cpuChoice);
   const isGameStarted = p1Choice !== null && cpuChoice !== null;
   const renLater = alert === true;
+
+  const handleHover = (e) => {
+    const hoveredWhich = e.target.id;
+    hoverDispatch({ type: "SET_HOVER", payload: [hoveredWhich, true] });
+  };
+
+  const handleLeave = () => {
+    hoverDispatch({ type: "SET_HOVER", payload: ["", false] });
+  };
+
+  const classNames = (value) => {
+    if (p1Choice === value) {
+      return "clicked-" + value;
+    } else if (isGameStarted && p1Choice != value) {
+      return "hide-card";
+    } else if (value === "Paper" && hovered[0] === "Rock") {
+      return "moveAnim-Paper-left";
+    } else if (value === "Paper" && hovered[0] === "Scissors") {
+      return "moveAnim-Paper-right";
+    } else if (hovered[0] === value && hovered[1]) {
+      return "active";
+    } else if (hovered[1]) {
+      return "moveAnim-" + value;
+    } else {
+      return value;
+    }
+  };
 
   useEffect(() => {
     if (alert === true) {
@@ -36,10 +64,6 @@ const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
       }, 2000);
     }
   }, [p1Choice]);
-
-  useEffect(() => {
-    console.log(attacker);
-  });
 
   return (
     <div className="board">
@@ -79,17 +103,28 @@ const Board = ({ p1Choice, cpuChoice, handleClick, handleinitclick }) => {
       </div>
 
       <div className="p1Board">
-        <Choice radio="rock-radio" value="Rock" handleClick={handleClick} />
-        <Choice radio="paper-radio" value="Paper" handleClick={handleClick} />
         <Choice
-          radio="scissors-radio"
+          className={`choice ${classNames("Rock")}`}
+          value="Rock"
+          handleClick={handleClick}
+          handleHover={handleHover}
+          handleLeave={handleLeave}
+        />
+        <Choice
+          className={`choice ${classNames("Paper")}`}
+          value="Paper"
+          handleClick={handleClick}
+          handleHover={handleHover}
+          handleLeave={handleLeave}
+        />
+        <Choice
+          className={`choice ${classNames("Scissors")}`}
           value="Scissors"
           handleClick={handleClick}
+          handleHover={handleHover}
+          handleLeave={handleLeave}
         />
       </div>
-      <input type="radio" name="p1Choice" id="rock-radio"></input>
-      <input type="radio" name="p1Choice" id="paper-radio"></input>
-      <input type="radio" name="p1Choice" id="scissors-radio"></input>
     </div>
   );
 };
